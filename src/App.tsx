@@ -141,6 +141,11 @@ const App: React.FC<{}> = () => {
 					{lastRemoved && <button className={"bring-back-button"} onClick={() => {
 						const copyOfConnections = connections.slice();
 						copyOfConnections.push(lastRemoved);
+						
+						for (const point of lastRemoved.points) {
+							usedNames.current.add(point.symbol);
+						}
+
 						setConnections(copyOfConnections);
 						setLastRemoved(null);
 					}}>Undo removal</button>}
