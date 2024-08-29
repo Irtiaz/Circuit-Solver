@@ -36,7 +36,6 @@ select {
 	word-wrap: normal;
 	display: inline;
 	padding: .375rem 2.25rem .375rem .75rem;
-	font-size: 1rem;
 	font-weight: 400;
 	line-height: 1.5;
 	color: #212529;
@@ -92,7 +91,6 @@ select {
 	user-select: none;
 	border: 1px solid transparent;
 	padding: .375rem .75rem;
-	font-size: 1rem;
 	border-radius: .25rem;
 	transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 	cursor: pointer;
@@ -142,7 +140,6 @@ select {
 	user-select: none;
 	border: 1px solid transparent;
 	padding: .375rem .75rem;
-	font-size: 1rem;
 	border-radius: .25rem;
 	transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 	cursor: pointer;
@@ -194,7 +191,6 @@ select {
 	user-select: none;
 	border: 1px solid transparent;
 	padding: .375rem .75rem;
-	font-size: 1rem;
 	border-radius: .25rem;
 	transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 	cursor: pointer;
@@ -209,4 +205,18 @@ li {
 	padding: 1em;
 	border-top: 1px solid grey;
 	border-bottom: 1px solid grey;
+}
+
+.remove-button {
+	color: white;
+	background-color: #d43f3a;
+}
+
+.bring-back-button {
+	color: white;
+	background-color: #2691b1;
+}
+
+button {
+	cursor: pointer;
 }

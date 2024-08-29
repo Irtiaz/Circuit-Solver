@@ -17,6 +17,8 @@ const App: React.FC<{}> = () => {
 
 	const [circuitGraph, setCircuitGraph] = useState<CircuitGraph | null>(null);
 
+	const [lastRemoved, setLastRemoved] = useState<CircuitConnection | null>(null);
+
 	const usedNames = useRef(new Set<string>());
 
 	function getNextName(): string {
@@ -67,9 +69,13 @@ const App: React.FC<{}> = () => {
 		const connection = new CircuitConnection(createPoint(coordinates[0], copyOfConnections), createPoint(coordinates[1], copyOfConnections), component);
 		copyOfConnections.push(connection);
 		setConnections(copyOfConnections);
+
+		setLastRemoved(null);
 	}
 
 	function handleDeleteEvent(connection: CircuitConnection): void {
+		setLastRemoved(connection);
+
 		const copyOfConnections = connections.slice();
 		for (let i = copyOfConnections.length - 1; i >= 0; --i) {
 			if (copyOfConnections[i] === connection) {
@@ -124,13 +130,24 @@ const App: React.FC<{}> = () => {
 		<div className="App">
 
 			{!circuitGraph && <div style={{marginBottom: "1em"}}>
-				{toolButton("Wire", tool, setTool)}
-				{toolButton("Resistance", tool, setTool)}
-				{toolButton("Battery", tool, setTool)}
-				{toolButton("Delete", tool, setTool)}
+				<div style={{display: "inline", marginRight: "1em"}}>
+					{toolButton("Wire", tool, setTool)}
+					{toolButton("Resistance", tool, setTool)}
+					{toolButton("Battery", tool, setTool)}
+					{toolButton("Delete", tool, setTool)}
+				</div>
+				<div style={{display: "inline", marginRight: "1em"}}>
+					{connections.length > 0 && <button onClick={() => handleDeleteEvent(connections[connections.length - 1])} className={"remove-button"}>Remove last connection</button>}
+					{lastRemoved && <button className={"bring-back-button"} onClick={() => {
+						const copyOfConnections = connections.slice();
+						copyOfConnections.push(lastRemoved);
+						setConnections(copyOfConnections);
+						setLastRemoved(null);
+					}}>Undo removal</button>}
+				</div>
 				<input type="checkbox" checked={showGrid} onChange={() => setShowGrid(!showGrid)}/>Show grid
 			</div>}
-
+			
 			<CircuitDrawer 
 				interactive={!circuitGraph}
 				showGrid={showGrid}
