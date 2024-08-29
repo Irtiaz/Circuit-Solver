@@ -27,7 +27,7 @@ export const CircuitDrawer: React.FC<Props> = ({ interactive, showGrid, connecti
 	let selectedPoint: p5Types.Vector | null = null;
 
 	function setup(p5: p5Types, canvasParentRef: Element): void {
-		p5.createCanvas(800, 600).parent(canvasParentRef);
+		p5.createCanvas(p5.windowWidth * 0.9, p5.windowHeight / 1.5).parent(canvasParentRef);
 		p5.textAlign(p5.CENTER, p5.CENTER);
 	}
 
@@ -71,11 +71,13 @@ export const CircuitDrawer: React.FC<Props> = ({ interactive, showGrid, connecti
 		}
 	}
 
+	function touchStarted(p5: p5Types): void {}
+
 	function keyPressed(p5: p5Types): void {
 		if (p5.keyCode === p5.ESCAPE) selectedPoint = null;
 	}
 
-	return <Sketch setup={setup} draw={draw} mousePressed={mousePressed} keyPressed={keyPressed}/>
+	return <Sketch setup={setup} draw={draw} mousePressed={mousePressed} keyPressed={keyPressed} touchStarted={touchStarted} />
 }
 
 function getNearbyPoint(p5: p5Types, gridSpacing: number): p5Types.Vector | null {
